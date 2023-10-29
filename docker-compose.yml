@@ -1,0 +1,26 @@
+version: '3'
+services:
+  nestjs-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/api:/app/backend/api
+    command: tail -f /dev/null  # Isso manterá o container em execução
+
+  # react-frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: frontend/Dockerfile
+  #   volumes:
+  #     - ./frontend/react-app:/app/frontend/react-app
+  #   command: tail -f /dev/null  # Isso manterá o container em execução
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
